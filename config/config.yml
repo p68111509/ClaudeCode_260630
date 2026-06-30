@@ -1,0 +1,49 @@
+# GeoAI Copilot 設定檔
+# 由 config::get() 讀取。改參數請動這裡，不要改程式。
+
+default:
+  app:
+    name: "GeoAI Copilot — 維運儀表板"
+    region: "Tainan"
+    demo_mode: false         # TRUE 用合成資料（免金鑰）；FALSE 走真實 API
+    timezone: "Asia/Taipei"
+    # 示範區範圍（真實模式下，把全台測站篩到此範圍，讓地圖聚焦台南）
+    region_bbox:
+      lat: [22.7, 23.4]
+      lon: [119.9, 120.6]
+
+  paths:
+    data_raw: "data/raw"
+    data_processed: "data/processed"
+    qc_history: "data/qc/qc_history.csv"
+
+  refresh:
+    expected_interval_min: 60   # 預期資料更新週期（分）
+
+  qc:
+    # ── BAD：硬規則 ─────────────────────────────
+    bad:
+      max_missing_rate: 0.20
+      stale_after_min: 120
+      ranges:
+        pm25: [0, 1000]
+        aqi:  [0, 500]
+        ndvi: [-1, 1]
+        temp: [-10, 50]
+        lat:  [21.5, 25.5]      # 台灣本島邊界
+        lon:  [119.5, 122.5]
+    # ── SAD：統計檢查 ───────────────────────────
+    sad:
+      mad_z_threshold: 3.5      # sad_outlier：穩健 z 門檻
+      drift_window: 8           # sad_drift：直近窗大小（筆）
+      drift_shift_z: 1.5        # sad_drift：中位數位移 / MAD 超過此值即發火（依實際資料調校）
+      flatline_window: 6        # sad_flatline：取最近 N 筆
+      flatline_min_sd: 0.01
+      # psi_* 保留供未來接「歷史基準分布」用（見 qc_sad.R compute_psi 註解）
+      psi_warn: 0.30
+      psi_alert: 0.50
+
+# 正式環境可覆寫（啟動前設 Sys.setenv(R_CONFIG_ACTIVE = "production")）
+production:
+  app:
+    demo_mode: false

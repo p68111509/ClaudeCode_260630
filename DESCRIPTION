@@ -1,0 +1,23 @@
+Package: geoaiCopilot
+Title: GeoAI Copilot — 空污健康導航原型與維運儀表板
+Version: 0.1.0
+Authors@R: person("NCKU", "Wu Lab", role = c("aut", "cre"))
+Description: 結合公開 API 的空污推估管線原型，含 BAD vs SAD 品管維運 Dashboard。
+  本檔同時作為 here 套件的專案根錨點 (root anchor)。
+License: file LICENSE
+Encoding: UTF-8
+Imports:
+    shiny,
+    shinydashboard,
+    DT,
+    dplyr,
+    tidyr,
+    lubridate,
+    plotly,
+    glue,
+    httr2,
+    jsonlite,
+    config,
+    here,
+    tibble
+RoxygenNote: 7.3.1

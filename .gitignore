@@ -1,0 +1,17 @@
+# 金鑰，切勿提交
+.env
+
+# 文件，切勿提交
+docs/
+
+# 產出資料
+data/raw/*
+data/processed/*
+data/qc/*
+!data/**/.gitkeep
+
+# R
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
