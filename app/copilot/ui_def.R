@@ -56,7 +56,7 @@
 "
 
 ui <- bslib::page_sidebar(
-  title = "GeoAI Copilot · 呼吸路徑",
+  title = "😊 GeoAI Copilot · 呼吸路徑",
   theme = bslib::bs_theme(
     version = 5, primary = "#0e8fa3",
     base_font = bslib::font_collection("Microsoft JhengHei", "PingFang TC",
